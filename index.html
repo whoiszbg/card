@@ -3,11 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flip Card</title>
+<title>Square Flip Card</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
     perspective:1200px;
 }
@@ -20,7 +26,7 @@ body{
     position:relative;
     width:100%;
     height:100%;
-    transition:transform .7s;
+    transition:transform .7s ease;
     transform-style:preserve-3d;
 }
 
@@ -30,11 +36,13 @@ body{
 
 .face{
     position:absolute;
+    inset:0;
     width:100%;
     height:100%;
-    backface-visibility:hidden;
-    border-radius:22px;
+    border-radius:24px;
     overflow:hidden;
+    backface-visibility:hidden;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 
 .back{
@@ -44,36 +52,43 @@ body{
 
 </head>
 
-<body class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 min-h-screen flex items-center justify-center p-5">
+<body class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 min-h-screen flex items-center justify-center p-6">
 
-<div class="w-full max-w-sm sm:max-w-md md:max-w-lg">
+<div class="w-full flex justify-center">
 
-    <div id="card"
-         class="flip-card aspect-[2/3] cursor-pointer">
+    <!-- Square Flip Card -->
+    <div
+        id="card"
+        class="flip-card w-full max-w-[600px] aspect-square cursor-pointer"
+    >
 
         <div class="flip-inner">
 
             <!-- FRONT -->
-            <div class="face bg-white shadow-2xl">
+            <div class="face bg-white">
 
-                <!-- CHANGE YOUR IMAGE HERE -->
+                <!-- Replace with your image -->
                 <img
                     src="2.png"
-                    class="w-full h-full object-cover">
+                    alt="Front Image"
+                    class="w-full h-full object-contain bg-white"
+                >
 
             </div>
 
             <!-- BACK -->
-            <div class="face back bg-gradient-to-br from-blue-700 via-blue-500 to-cyan-400 text-white flex flex-col justify-center items-center p-8 shadow-2xl">
+            <div
+                class="face back bg-gradient-to-br from-blue-700 via-blue-500 to-cyan-400 text-white flex flex-col items-center justify-center p-8"
+            >
 
-                <h2 class="text-3xl font-bold mb-4">
+                <h2 class="text-4xl font-bold mb-5">
                     Back Side
                 </h2>
 
-                <p class="text-center text-lg opacity-90">
-                    You can place any content here.
-                    Text, buttons, icons, QR codes,
-                    links, or additional images.
+                <p class="text-center text-lg leading-relaxed max-w-sm">
+                    You can place any content here such as text,
+                    buttons, QR codes, social media links,
+                    contact information, or another image.
                 </p>
 
             </div>
@@ -85,13 +100,11 @@ body{
 </div>
 
 <script>
+const card = document.getElementById("card");
 
-const card=document.getElementById("card");
-
-card.addEventListener("click",()=>{
+card.addEventListener("click", () => {
     card.classList.toggle("flipped");
 });
-
 </script>
 
 </body>
